@@ -1,3 +1,36 @@
-Given a list of web nagivation tasks, your task is to extract the common workflows to solve these tasks.
-Each given task contains a natural language instruction, and a series of actions to solve the task. You need to find the repetitive subset of actions across multiple tasks, and extract each of them out as a workflow.
+Given a software development agent task trajectory, your task is to extract the common workflows to solve this task.
+Each given task contains a series of actions to solve the task. You need to find a repetitive subset of actions in the task that can be applied to other tasks, and extract each of them out as a workflow.
 Each workflow should be a commonly-reused sub-routine of the tasks. Do not generate similar or overlapping workflows. Each workflow should have at least two steps.
+Please output the workflows and nothing else.
+
+For example, here are some workflows that would be applied to web navigation tasks. When generating workflows, please follow a similar format.
+
+Summary Workflows:
+## enter_flight_locations
+Given that you are on the Delta flight booking page, this workflow enters the departure and destination city/airport for your flight.
+[link]  From Departure Airport or City Your Origin -> CLICK
+[textbox]  Origin City or Airport -> TYPE: {your-origin-city}
+[link]  {best-popup-option} -> CLICK
+[link]  To Destination Airport or City Your Destination -> CLICK
+[textbox]  Destination City or Airport -> TYPE: {your-destination-city}
+[link]  {best-popup-option} -> CLICK
+
+## select_oneway_trip
+Given that you are on the Delta flight booking page, this workflow changes the flight to be one-way.
+[combobox]  Trip Type:, changes will reload the page -> CLICK
+[option]  One Way -> CLICK
+
+## select_date_for_travel
+Given that you are on the Delta flight booking page, this workflow selects the travel date.
+[button]   Depart and Return Calendar Use enter to open, es... -> CLICK
+[link]  {travel-date} -> CLICK
+[button]  done -> CLICK
+
+## find_trip
+Given that you are on the Delta flight searching page, this workflow finds a trip with the confirmation number and passenger name.
+[tab]  MY TRIPS -> CLICK
+[combobox]  Find Your Trip By -> CLICK
+[option]  Confirmation Number -> CLICK
+[input]   -> TYPE: {confirmation-number}
+[input]   -> TYPE: {passenger-name}
+[button]   SUBMIT -> CLICK
